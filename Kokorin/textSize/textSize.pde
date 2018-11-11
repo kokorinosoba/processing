@@ -1,0 +1,11 @@
+PImage img;
+img = loadImage("test.JPG");
+size(1820, 1024);
+image(img, 0, 0, width, height);
+textFont(createFont("MS Gothic", 48));
+textSize(35);
+textAlign(CENTER, CENTER);
+String s = "ワインツーリズム楽しワインツーリズム楽しワインツーリズム楽しワインツーリズム楽しワインツーリズム楽しワインツーリズム楽しワインツーリズム楽しワインツーリズム楽しワインツーリズム楽しワインツーリズム楽しワインツーリズム楽しワインツーリズム楽しワインツーリズム楽し";
+rectMode(CENTER);
+text(s, width/2, height/2, width/2, height);
+println(s.length());
