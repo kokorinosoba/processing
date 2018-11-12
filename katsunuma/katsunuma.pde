@@ -1,7 +1,7 @@
 String imageName;
 PImage img;
 PFont font;
-int imageNum = 10;
+int imageNum = 12;
 String tweet = "do you love ? do you love me ? i will never let your love";
 int tweetLen;
 
@@ -25,7 +25,7 @@ void draw() {
     fill(255);
     text(tweet, 60, 50, width/2, height);
     break;
-  case 1: //保留
+  case 1:
     noStroke();
     fill(255, 90);
     rect(0, 350, 800, 300);
@@ -36,9 +36,9 @@ void draw() {
   case 2:
     noStroke();
     fill(#ffa500,200);
-    rect(0,150,width/2,height/2);
+    rect(0,200,width/2,200);
     fill(0);
-    text(tweet, 30,170,360,280);
+    text(tweet, 30,220,360,180);
     break;
   case 3:
     noStroke();
@@ -71,23 +71,17 @@ void draw() {
     text(tweet,20,20,400,200);
     break;
   case 10:
-    fill(#8b5413);
-    noStroke();
-    beginShape();
-     vertex(0,100);
-     vertex(600,200);
-     vertex(600,300);
-     vertex(0,250);
-    endShape();
-    break;
+   noStroke();
+   fill(0,100);
+   rect(300,350,500,250);
+   fill(255);
+   text(tweet,320,370,480,230);
+   break;
+  case 12:
+   fill(255);
+   text(tweet,20,330,400,280);
+   break;
    
-    
-    
-    
-    
-    
-    
-    
   default:
   }
 }
