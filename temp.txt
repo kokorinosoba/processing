@@ -1,0 +1,13 @@
+case 0: image("faves.JPG", 0, 0, width, height); break;
+case 1: image("kouho00001.JPG", 0, 0, width, height); break;
+case 2: image("kouho00002.JPG", 0, 0, width, height); break;
+case 3: image("kouho00003.JPG", 0, 0, width, height); break;
+case 4: image("kouho00004.JPG", 0, 0, width, height); break;
+case 5: image("kouho00005.JPG", 0, 0, width, height); break;
+case 6: image("kouho00006.JPG", 0, 0, width, height); break;
+case 7: image("kouho00007.JPG", 0, 0, width, height); break;
+case 8: image("kouho00008.JPG", 0, 0, width, height); break;
+case 9: image("kouho00009.JPG", 0, 0, width, height); break;
+case 10: image("kouho00010.JPG", 0, 0, width, height); break;
+case 11: image("kouho00011.JPG", 0, 0, width, height); break;
+case 12: image("kouho00012.JPG", 0, 0, width, height); break;
