@@ -1,30 +1,43 @@
 * setup function
-	* PhotoSelectorとTweetSelectorからインスタンスを生成
-	* 
+	* PhotoSelectorからインスタンスを生成
 * PhotoSelector
-	* PhotoNames
-		* 写真の名前を保持する変数
-	* PhotoIndex
+	* コンストラクタ
+		* TweetSelectorからインスタンスを生成
+	* photoNames
+		* 写真の名前を保持する変数（リスト？）
+	* photoIndex
 		* どの写真を表示するかのインデックスを保持する変数
+	* img
+		* loadImageした写真を保持する変数
+	* counter
+		* tで割ったときにchangerを呼ぶことで表示する写真を変えるメソッド
+		* PhotoSelector.draw()から呼ばれる
+		* indexIncrementを使う
+		* ツイートも変えるので、ツイートのindexIncrementも呼び出す
 	* IndexIncrement
-		* インデックスを増やす
+		* インデックスを増やすメソッド
 		* 増やしたときにPhotoNamesの要素の個数以上だった場合に最初に戻る
-	* PhotoDisplay
+	* showText
+		* テキストを受け取ってそのテキストを写真のデザインに合わせて表示するメソッド
+		* switch文使う予定
+	* photoDisplay（draw関数？）
 		* 写真を表示するメソッド
 		* 写真と同時にツイートも表示するのでこの中でツイートの表示設定と表示を行う？
 * TweetSelector
 	* コンストラクタ
 		* getTweetFromCSVを実行
-	* Tweets
+	* tweets
 		* ツイートのリストを保持する変数
-	* TweetIndex
+	* tweetIndex
 		* どのツイートを表示するかのインデックスを保持する変数
-	* IndexIncrement
+	* indexIncrement
 		* インデックスを増やすメソッド
 		* 増やしたときにTweetsの要素の個数以上だった場合に0にする
-	* getTweetFromCSV(Option)
-		* ツイートをCSVファイルから取得するメソッド
-		* CSVに更新があったかどうかを記録するCsvUpdatedの値がTrueならIndexを0にする
+	* getTweet
+		* インデックスが指すツイートを返すメソッド
+	* loadTweetFromCSV
+		* ツイートをCSVファイルから取得するメソッド（ただし値は返さない）
+		* CSVに更新があったかどうかを記録するCsvUpdatedの値がTrueならIndexを0にする(Option)
 		* Indexを0にしたらCsvUpdatedをFalseに書き換える？（未定）
 * draw function
 	* PhotoSelectorの写真を表示するメソッドをを呼び出す
