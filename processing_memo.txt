@@ -1,1 +1,0 @@
-arc(x-coordinate, y-coordinate, arc-width, arc-height, start, stop);
