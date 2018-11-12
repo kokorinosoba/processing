@@ -1,5 +1,5 @@
 class PhotoSelector {
-  String[] photoNames = {"photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg"};
+  String[] photoNames = {"photo00000.JPG", "photo00001.JPG", "photo00002.JPG", "photo00003.JPG", "photo00004.JPG", "photo00005.JPG", "photo00006.JPG", "photo00007.JPG", "photo00008.JPG", "photo00009.JPG", "photo00010.JPG"};
   int photoIndex;
   int displayCounter;
   int displaySecond;
@@ -9,12 +9,14 @@ class PhotoSelector {
   TweetSelector tweet;
 
   PhotoSelector() {
-    photoIndex = 0;
+    photoIndex = 0;  // initial photoIndex
     img = loadImage(photoNames[photoIndex]);
     tweet = new TweetSelector();
     displayCounter = 0;
-    displaySecond = 1;
     reloadCounter = 0;
+    // interval parameters
+    // set values in display > reload otherwise reloadSecond in vain
+    displaySecond = 100;
     reloadSecond = 10;
   }
 
@@ -57,7 +59,69 @@ class PhotoSelector {
 
   void showText() {
     switch (photoIndex) {
-
+    case 0:
+      noStroke();
+      fill(0, 80);
+      rect(width / 16, 0, width/2, height);
+      fill(255);
+      text(tweet.getTweet(), width * 3 / 40, height / 12, width / 2 - width / 40, height);
+      break;
+    case 1:
+      noStroke();
+      fill(255, 90);
+      rect(0, height * 7 / 12, width, height * 5 / 12);
+      rectMode(CORNER);
+      fill(0);
+      text(tweet.getTweet(), width * 3 / 80, height * 37 / 60, width * 74 / 80, height * 29 / 60);
+      break;
+    case 2:
+      noStroke();
+      fill(#ffa500, 200);
+      rect(0, height / 3, width / 2, height / 3);
+      fill(0);
+      text(tweet.getTweet(), width * 3 / 80, height * 11 / 30, width * 9 / 20, height * 3 / 10);
+      break;
+    case 3:
+      noStroke();
+      fill(255, 120);
+      rect(0, 0, width * 33 / 80, height);
+      fill(0);
+      text(tweet.getTweet(), width / 40, height / 30, width * 3 / 8, height);
+      break;
+    case 4:
+      fill(255);
+      text(tweet.getTweet(), width / 2, height / 30, width * 19 / 40, height / 2);
+      break;
+    case 5:
+      noStroke();
+      fill(255, 180);
+      rect(width / 20, 0, width * 7 / 20, height * 2 / 3);
+      fill(0);
+      text(tweet.getTweet(), width * 3 / 40, height / 60, width * 13 / 40, height * 19 / 30);
+      break;
+    case 6:
+      fill(255);
+      text(tweet.getTweet(), width / 8, width * 5 / 12, width * 3 / 4, width * 5 / 12);
+      break;
+    case 7:
+      fill(255);
+      text(tweet.getTweet(), width / 40, height * 7 / 12, width *  11 / 16, height * 23 / 60);
+      break;
+    case 8:
+      fill(255);
+      text(tweet.getTweet(), width / 40, height / 30, width / 2, height / 3);
+      break;
+    case 9:
+      noStroke();
+      fill(0, 100);
+      rect(300, 350, 500, 250);
+      fill(255);
+      text(tweet.getTweet(), width * 2 / 5, height * 37 / 60, width * 23 / 40, height * 23 / 60);
+      break;
+    case 10:
+      fill(255);
+      text(tweet.getTweet(), width / 40, height * 11 / 20, width / 2, height * 7 / 15);
+      break;
     default:
       fill(0);
       textAlign(CENTER, CENTER);
