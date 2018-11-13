@@ -114,7 +114,7 @@ class PhotoSelector {
     case 9:
       noStroke();
       fill(0, 100);
-      rect(300, 350, 500, 250);
+      rect(width * 3 / 8, height * 7 / 12, width * 5 / 8, height * 5 / 12);
       fill(255);
       text(tweet.getTweet(), width * 2 / 5, height * 37 / 60, width * 23 / 40, height * 23 / 60);
       break;
