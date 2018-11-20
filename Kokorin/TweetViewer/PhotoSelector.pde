@@ -16,8 +16,8 @@ class PhotoSelector {
     reloadCounter = 0;
     // interval parameters
     // set values in display > reload otherwise reloadSecond in vain
-    displaySecond = 100;
-    reloadSecond = 10;
+    displaySecond = 6;
+    reloadSecond = 30;
   }
 
   void draw() {
@@ -68,7 +68,7 @@ class PhotoSelector {
       break;
     case 1:
       noStroke();
-      fill(255, 90);
+      fill(255, 150);
       rect(0, height * 7 / 12, width, height * 5 / 12);
       rectMode(CORNER);
       fill(0);
@@ -77,9 +77,9 @@ class PhotoSelector {
     case 2:
       noStroke();
       fill(#ffa500, 200);
-      rect(0, height / 3, width / 2, height / 3);
+      rect(0, height / 4, width / 2, height / 2);
       fill(0);
-      text(tweet.getTweet(), width * 3 / 80, height * 11 / 30, width * 9 / 20, height * 3 / 10);
+      text(tweet.getTweet(), width * 3 / 80, height * 9 / 30, width * 9 / 20, height * 3 / 10);
       break;
     case 3:
       noStroke();
@@ -97,11 +97,11 @@ class PhotoSelector {
       fill(255, 180);
       rect(width / 20, 0, width * 7 / 20, height * 2 / 3);
       fill(0);
-      text(tweet.getTweet(), width * 3 / 40, height / 60, width * 13 / 40, height * 19 / 30);
+      text(tweet.getTweet(), width * 3 / 40, height / 60, width * 12 / 40, height * 19 / 30);
       break;
     case 6:
       fill(255);
-      text(tweet.getTweet(), width / 8, width * 5 / 12, width * 3 / 4, width * 5 / 12);
+      text(tweet.getTweet(), width / 8, height * 5 / 12, width * 3 / 4, height * 5 / 12);
       break;
     case 7:
       fill(255);
@@ -114,7 +114,7 @@ class PhotoSelector {
     case 9:
       noStroke();
       fill(0, 100);
-      rect(300, 350, 500, 250);
+      rect(width * 3 / 8, height * 7 / 12, width * 5 / 8, height * 5 / 12);
       fill(255);
       text(tweet.getTweet(), width * 2 / 5, height * 37 / 60, width * 23 / 40, height * 23 / 60);
       break;
