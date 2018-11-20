@@ -6,7 +6,7 @@ void setup() {
   frameRate(myFrameRate);
   photo = new PhotoSelector();
 
-  PFont font = createFont("", 100);
+  PFont font = createFont("MPLUSRounded1c-Regular.ttf", 100);
   textFont(font);
   photo.setTextSize();
 }
