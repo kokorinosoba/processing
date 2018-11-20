@@ -5,12 +5,20 @@
 
 # ## 初期設定
 
+# In[ ]:
+
+
 from requests_oauthlib import OAuth1Session
 import requests
 import json
 import pandas as pd
 from datetime import datetime, timedelta
 from dateutil import parser
+import os
+
+
+# In[ ]:
+
 
 # TWITTER API KEYS
 CONSUMER_KEY = "3butuXSsI3D8ekK92Rh0NLn0i"
@@ -18,17 +26,29 @@ CONSUMER_SECRET = "o9w4gkXI9nvgPCFVctnypUlIszMk0Y7DuzxmGjVFyO4mwuJPHu"
 ACCESS_TOKEN = "807962421683884032-MtVZ8NEIGizZ3K2Cg1Au0wg17gYIO8K"
 ACCESS_TOKEN_SECRET = "u1SzoI5AYWiXyXShUIOqomYvTRaRZSEpujeTI350NzgNz"
 
+
+# In[ ]:
+
+
 twitter = OAuth1Session(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+
 
 # ## 関数群
 
 # ### APIへのアクセス関連
+
+# In[ ]:
+
 
 def lists_create(name):
     url = 'https://api.twitter.com/1.1/lists/create.json'
     param = {"name": name}
     result = twitter.post(url, params=param)
     print(result)
+
+
+# In[ ]:
+
 
 def statuses_home_timeline(number):
     url = "https://api.twitter.com/1.1/statuses/home_timeline.json"
@@ -37,11 +57,19 @@ def statuses_home_timeline(number):
     print(result)
     return result
 
+
+# In[ ]:
+
+
 def statuses_update(text):
     url = "https://api.twitter.com/1.1/statuses/update.json"
     param = {"status": text}
     result = twitter.post(url, params=param)
     print(result)
+
+
+# In[ ]:
+
 
 def statuses_user_timeline(screen_name="winetourism01", count=15):
     url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
@@ -50,12 +78,17 @@ def statuses_user_timeline(screen_name="winetourism01", count=15):
     print("statuses_user_timeline", result)
     return result
 
+
+# In[ ]:
+
+
 def search_tweets(text, n_tweets=1, result_type="recent", until=str(datetime.now().strftime("%Y-%m-%d"))):
     url = "https://api.twitter.com/1.1/search/tweets.json"
     param = {"q": text, "count": n_tweets, "lang": "ja", "result_type": result_type}
     result = twitter.get(url, params=param)
     print("search_tweets", result)
     return result
+
 
 # ### CSVへの保存など
 
@@ -70,8 +103,12 @@ def search_tweets(text, n_tweets=1, result_type="recent", until=str(datetime.now
 # * retweet_count
 # * favorite_count
 
+# In[ ]:
+
+
 def save_to_df(result):
-    df = pd.read_csv("output.csv")
+    filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output.csv")
+    df = pd.read_csv(filename)
     tweets_json = json.loads(result.text)
     tweets_json = tweets_json["statuses"] if type(tweets_json) == dict else tweets_json
     now_t = datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
@@ -81,10 +118,18 @@ def save_to_df(result):
             series = pd.Series(elements, index=df.columns).replace("\n", "", regex=True)
             df = df.append(series, ignore_index=True)
     df = df.sort_values(by="created_at", ascending=False)
-    df.to_csv("output.csv", index=False)
+    df.to_csv(filename, index=False)
+
+
+# In[ ]:
+
 
 def join_search_words(search_words):
     return "+OR+".join(search_words)
+
+
+# In[ ]:
+
 
 def execute(search_words, until=str(datetime.now().strftime("%Y-%m-%d"))):
     if len(search_words) > 1 and type(search_words) == list:
@@ -94,20 +139,19 @@ def execute(search_words, until=str(datetime.now().strftime("%Y-%m-%d"))):
     result = statuses_user_timeline(count=100)
     save_to_df(result)
 
-# join_search_wordsを使わない場合（キーワード毎にAPIを叩くので効率が悪い）
-
-#    for word in search_words:
-#        result = search_tweets(word, 100)
-#        save_to_df(result)
 
 # ## ここで実行
 
+# In[ ]:
+
+
 search_words = ['"ワインツーリズムやまなし"', '"ワインツーリズム山梨"', '"#ワインツーリズムやまなし"', '"#ワインツーリズム山梨"']
+
+
+# In[ ]:
+
 
 execute(search_words)
 
-# ## 作業用
 
-# for i, tweet in enumerate(json.loads(search_tweets("#ワインツーリズムやまなし").text)["statuses"]):
-#     print("-"*80)
-#     print(i, tweet["text"])
+# ## 作業用

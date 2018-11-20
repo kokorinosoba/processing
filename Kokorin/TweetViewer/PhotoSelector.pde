@@ -16,8 +16,8 @@ class PhotoSelector {
     reloadCounter = 0;
     // interval parameters
     // set values in display > reload otherwise reloadSecond in vain
-    displaySecond = 3;
-    reloadSecond = 10;
+    displaySecond = 6;
+    reloadSecond = 30;
   }
 
   void draw() {
