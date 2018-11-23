@@ -1,14 +1,15 @@
 String imageName;
 PImage img;
 PFont font;
-int imageNum = 12;
-String tweet = "do you love ? do you love me ? i will never let your love";
+
+int imageNum = 0;
+String tweet = " 夏目漱石はi love youを「月が綺麗ですね。」と訳しました。";
 int tweetLen;
 
 void setup() {
   size(800, 600);
   img = loadImage(imageSelector(imageNum));
-  font = createFont("AmaticSC-Bold.ttf", 100);
+  font = createFont("MPLUSRounded1c-Light.ttf", 100);
   textFont(font);
   tweetLen = tweet.length();
   println(tweetLen);
