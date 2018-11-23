@@ -15,6 +15,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 from dateutil import parser
 import os
+import sys
 
 
 # In[ ]:
@@ -82,9 +83,9 @@ def statuses_user_timeline(screen_name="winetourism01", count=15):
 # In[ ]:
 
 
-def search_tweets(text, n_tweets=1, result_type="recent", until=str(datetime.now().strftime("%Y-%m-%d"))):
+def search_tweets(text, n_tweets=1, result_type="recent", until=str(datetime.now().strftime("%Y-%m-%d")), include_entities="true"):
     url = "https://api.twitter.com/1.1/search/tweets.json"
-    param = {"q": text, "count": n_tweets, "lang": "ja", "result_type": result_type}
+    param = {"q": text, "count": n_tweets, "lang": "ja", "result_type": result_type, "include_entities": include_entities}
     result = twitter.get(url, params=param)
     print("search_tweets", result)
     return result
@@ -106,6 +107,19 @@ def search_tweets(text, n_tweets=1, result_type="recent", until=str(datetime.now
 # In[ ]:
 
 
+def remove_tagurl(tweet):
+    text = tweet["text"]
+    if not tweet["entities"]["hashtags"] == []:
+        for tag in tweet["entities"]["hashtags"]:
+            text = text.replace("#"+tag["text"], "")
+    if not tweet["entities"]["urls"] == []:
+        text = text.replace(tweet["entities"]["urls"][0]["url"], "")    
+    return text
+
+
+# In[ ]:
+
+
 def save_to_df(result):
     filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output.csv")
     df = pd.read_csv(filename)
@@ -113,7 +127,10 @@ def save_to_df(result):
     tweets_json = tweets_json["statuses"] if type(tweets_json) == dict else tweets_json
     now_t = datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
     for tweet in tweets_json:
-        elements = [now_t, tweet["id"], parser.parse(tweet["created_at"]).strftime('%Y-%m-%d_%H:%M:%S'), tweet["text"], tweet["user"]["name"], tweet["user"]["screen_name"], tweet["user"]["profile_image_url"], tweet["retweet_count"], tweet["favorite_count"]]
+        text = remove_tagurl(tweet)
+        # elementsに一行分のデータを入れる
+        elements = [now_t, tweet["id"], parser.parse(tweet["created_at"]).strftime('%Y-%m-%d_%H:%M:%S'), text, tweet["user"]["name"], tweet["user"]["screen_name"], tweet["user"]["profile_image_url"], tweet["retweet_count"], tweet["favorite_count"]]
+        # retweetであれば追加しない、追加しようとするツイートのidがすでにcsvファイルに入ってたら追加しない、リプライであれば追加しない
         if not "retweeted_status" in tweet.keys() and not tweet["id"] in df["id"].values and tweet["in_reply_to_status_id"] == None: # 条件式を考える
             series = pd.Series(elements, index=df.columns).replace("\n", "", regex=True)
             df = df.append(series, ignore_index=True)
