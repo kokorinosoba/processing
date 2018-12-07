@@ -80,7 +80,7 @@ def statuses_update(text):
 
 
 def statuses_user_timeline(screen_name="OMtB0XiogH5Repl", count=15):
-    url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
+    url = "https://api.twitter.com/1.1/statuses/user_timeline.json?tweet_mode=extended"
     param = {"screen_name": screen_name, "count": count}
     result = twitter.get(url, params=param)
     print("statuses_user_timeline", result)
@@ -91,7 +91,7 @@ def statuses_user_timeline(screen_name="OMtB0XiogH5Repl", count=15):
 
 
 def search_tweets(text, n_tweets=1, result_type="recent", until=str(datetime.now().strftime("%Y-%m-%d")), include_entities="true"):
-    url = "https://api.twitter.com/1.1/search/tweets.json"
+    url = "https://api.twitter.com/1.1/search/tweets.json?tweet_mode=extended"
     param = {"q": text, "count": n_tweets, "lang": "ja", "result_type": result_type, "include_entities": include_entities}
     result = twitter.get(url, params=param)
     print("search_tweets", result)
@@ -115,7 +115,7 @@ def search_tweets(text, n_tweets=1, result_type="recent", until=str(datetime.now
 
 
 def remove_tagurl(tweet):
-    text = tweet["text"]
+    text = tweet["full_text"]
     if not tweet["entities"]["hashtags"] == []:
         for tag in tweet["entities"]["hashtags"]:
             text = text.replace("#"+tag["text"], "")
