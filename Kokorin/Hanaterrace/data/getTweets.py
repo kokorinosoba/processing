@@ -21,6 +21,13 @@ import sys
 # In[ ]:
 
 
+# jupyter-notebookの設定(.pyとして保存するときには消す)
+#__file__ = os.path.abspath("getTweets.ipynb")
+
+
+# In[ ]:
+
+
 # TWITTER API KEYS
 CONSUMER_KEY = "3butuXSsI3D8ekK92Rh0NLn0i"
 CONSUMER_SECRET = "o9w4gkXI9nvgPCFVctnypUlIszMk0Y7DuzxmGjVFyO4mwuJPHu"
@@ -72,7 +79,7 @@ def statuses_update(text):
 # In[ ]:
 
 
-def statuses_user_timeline(screen_name="winetourism01", count=15):
+def statuses_user_timeline(screen_name="OMtB0XiogH5Repl", count=15):
     url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
     param = {"screen_name": screen_name, "count": count}
     result = twitter.get(url, params=param)
@@ -112,8 +119,12 @@ def remove_tagurl(tweet):
     if not tweet["entities"]["hashtags"] == []:
         for tag in tweet["entities"]["hashtags"]:
             text = text.replace("#"+tag["text"], "")
+            text = text.replace("＃"+tag["text"], "")
     if not tweet["entities"]["urls"] == []:
-        text = text.replace(tweet["entities"]["urls"][0]["url"], "")    
+        for urls in tweet["entities"]["urls"]:
+            text = text.replace(urls["url"], "")
+    if "media" in tweet["entities"].keys():
+        text = text.replace(tweet["entities"]["media"][0]["url"], "")
     return text
 
 
@@ -142,6 +153,7 @@ def save_to_df(result):
 
 
 def join_search_words(search_words):
+    search_words = ['"'+word+'"' for word in search_words]
     return "+OR+".join(search_words)
 
 
@@ -149,9 +161,11 @@ def join_search_words(search_words):
 
 
 def execute(search_words, until=str(datetime.now().strftime("%Y-%m-%d"))):
-    if len(search_words) > 1 and type(search_words) == list:
-        search_words = join_search_words(search_words)
+    #if len(search_words) > 1 and type(search_words) == list:
+    search_words = join_search_words(search_words)
     result = search_tweets(search_words, n_tweets=100, until=until)
+    save_to_df(result)
+    result = statuses_user_timeline(count=100)
     save_to_df(result)
 
 
@@ -160,7 +174,7 @@ def execute(search_words, until=str(datetime.now().strftime("%Y-%m-%d"))):
 # In[ ]:
 
 
-search_words = ['"ハナテラス"', '"#ハナテラス"']
+search_words = ["ハナテラス", "#ハナテラス"]
 
 
 # In[ ]:
