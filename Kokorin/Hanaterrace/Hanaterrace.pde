@@ -16,11 +16,7 @@ void draw() {
 
 void mousePressed() {
   photo.tweet.loadTweetFromCSV();
-  photo.photoIndex = 0;
-  // println(tweet.getTweet());
-  // tweet.indexIncrement();
-  // photo.draw();
-  // photo.counter();
-  // println(photo.tweet.getTweet());
-  // println(frameRate);
+  photo.tweet.tweetIndex = 0;
+  photo.displayCounter = 0;
+  photo.setTextSize();
 }
