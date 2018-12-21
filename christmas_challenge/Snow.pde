@@ -1,6 +1,6 @@
-class Snow{
+//class Snow{
   color col;
-  //float snow_size;
+  float snow_size;
   float x;
   float y;
   float r;
