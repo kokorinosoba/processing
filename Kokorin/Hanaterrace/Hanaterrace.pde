@@ -2,7 +2,7 @@ PhotoSelector photo;
 public final float myFrameRate = 1;
 
 void setup() {
-  size(1600, 1000);
+  size(1920, 1080);
   frameRate(myFrameRate);
   photo = new PhotoSelector();
 
@@ -15,11 +15,8 @@ void draw() {
 }
 
 void mousePressed() {
-  // tweet.loadTweetFromCSV();
-  // println(tweet.getTweet());
-  // tweet.indexIncrement();
-  // photo.draw();
-  // photo.counter();
-  // println(photo.tweet.getTweet());
-  // println(frameRate);
+  photo.tweet.loadTweetFromCSV();
+  photo.tweet.tweetIndex = 0;
+  photo.displayCounter = 0;
+  photo.setTextSize();
 }
