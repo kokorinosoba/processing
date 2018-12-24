@@ -9,17 +9,16 @@ class FadeMessages {
   int showSecond = 7;
   float fadeSecond = 3;
   float fadeSpeed = 255 / (fadeSecond * myFrameRate);
+  boolean musicFade = false;
 
   FadeMessages() {
     font = createFont(fontName, 32);
     messages = new String[]{"\n\n\n泰世へ", 
       "たのしんで、大学生活\nいろんなことを経験して\nせかいを広げてね！\nいつかまた会おう\n月曜にいた田中", 
       "大学合格おめでとう！！大学は泰世が思っているよりもきっとずっと楽しいところです（笑）東京では慣れないことも多いと思うけど、持ち前の明るさで是非楽しんでください。\n中山翔也", 
-      
-      
       "校長先生に提出する論文の作成に長い間考えていたのが、ついこの間のようです。１年もない短い間だったけど、仲良くなれたかなと自分では思っています。おめでとう。そしてこれからも頑張って！！\nくまもん水口", 
       "５年間、先生でいれたことが何より自分の宝物です。良いところも、もっと頑張ってほしいところもたくさんみてきたけど、やっぱり泰世はいい子だ！！色んなことを経験して、しあわせになってほしいです。\nありがとう。\n植田"}; 
-      fadeMode = true;
+    fadeMode = true;
     textFont(font);
   }
 
@@ -62,6 +61,9 @@ class FadeMessages {
       if (alpha > 0.0F) {
         alpha = alpha - fadeSpeed;
         cnt = 0;
+        if (mcnt == messages.length - 1) {
+          musicFade = true;
+        }
       } else {
         println("next!!");
         fadeMode = !fadeMode;
