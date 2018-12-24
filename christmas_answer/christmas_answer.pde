@@ -28,7 +28,7 @@ Snow[] snows = new Snow[num];
 FadeMessages messages;
 
 void setup() {
-  size(800, 600);
+  size(1450, 900);
   frameRate(myFrameRate);
   img = loadImage("cherry.jpg");
 
