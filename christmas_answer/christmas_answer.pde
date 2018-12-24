@@ -22,6 +22,7 @@ public int myFrameRate = 20;
 final int num = 500; 
 int wind = 0;
 Boolean flag = false;
+float volume = 0;
 
 Snow[] snows = new Snow[num];
 FadeMessages messages;
@@ -62,6 +63,10 @@ void draw() {
     snows[i].show();
   }
   messages.draw();
+  if (messages.musicFade) {
+    player.setGain(volume);
+    volume -= 0.5;
+  }
 }
 
 void keyPressed() {
@@ -77,6 +82,9 @@ void keyPressed() {
 
 void keyReleased() {
   flag=false;
+}
+void mouseClicked() {
+  messages.mcnt++;
 }
 
 void stop(){
