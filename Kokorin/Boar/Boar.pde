@@ -1,3 +1,5 @@
+float s = 10;
+
 void setup() {
   size(600, 600);
 }
@@ -6,56 +8,56 @@ void draw() {
 
   // 顔
   stroke(84, 53, 13);
-  strokeWeight(10);
+  strokeWeight(s);
   fill(246, 202, 112);
-  ellipse(0, 0, 300, 300);
+  ellipse(0, 0, 30 * s, 30 * s);
 
   // 耳
   rotate(-PI/6);
   for (float angle = 0; angle < TWO_PI/3; angle += PI/3) {
     rotate(angle);
     stroke(84, 53, 13);
-    arc(0, -148, 50, 80, PI, TWO_PI);
+    arc(0, -14.8 * s, 5 * s, 8 * s, PI, TWO_PI);
     noStroke();
-    ellipse(0, -148, 40, 70);
+    ellipse(0, -14.8 * s, 4 * s, 7 * s);
   } 
   rotate(-PI/6);
 
   // 鼻
   stroke(84, 53, 13);
   fill(255);
-  ellipse(0, -20, 70, 60);
+  ellipse(0, -2 * s, 7 * s, 6 * s);
 
   // 鼻の穴
-  strokeWeight(10);
-  line(-10, -15, -10, -25);
-  line(10, -15, 10, -25);
+  strokeWeight(s);
+  line(-s, -1.5 * s, -s, -2.5 * s);
+  line(s, -1.5 * s, s, -2.5 * s);
 
   // 目
-  strokeWeight(20);
-  point(60, -30);
-  point(-60, -30);
+  strokeWeight(2 * s);
+  point(6 * s, -3 * s);
+  point(-6 * s, -3 * s);
 
   // ほっぺ
   noStroke();
   fill(241, 167, 135);
-  ellipse(-110, -10, 60, 60);
-  ellipse(110, -10, 60, 60);
+  ellipse(-11 * s, -s, 6 * s, 6 * s);
+  ellipse(11 * s, -s, 6 * s, 6 * s);
 
   // おでこ
   noStroke();
   fill(200, 126, 60);
-  arc(0, -145, 20, 150, 0, PI);
+  arc(0, -14.5 * s, 2 * s, 15 * s, 0, PI);
 
   rotate(-PI/10);
   for (float angle = 0; angle < TWO_PI/5; angle += PI/5) {
     rotate(angle);
-    arc(0, -145, 20, 130, 0, PI);
+    arc(0, -14.5 * s, 2 * s, 13 * s, 0, PI);
   }
   rotate(-PI/10);
 
   // 足
   fill(84, 53, 13);
-  arc(-60, 110, 60, 60, PI/6 - HALF_PI, TWO_PI - HALF_PI);
-  arc(60, 110, 60, 60, -HALF_PI, TWO_PI - HALF_PI - PI/6);
+  arc(-6 * s, 11 * s, 6 * s, 6 * s, PI/6 - HALF_PI, TWO_PI - HALF_PI);
+  arc(6 * s, 11 * s, 6 * s, 6 * s, -HALF_PI, TWO_PI - HALF_PI - PI/6);
 }
